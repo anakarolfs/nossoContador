@@ -2,71 +2,19 @@
 
 <style>
 
-    html {
-      box-sizing: border-box;
-    }
-
-    *, *:before, *:after {
-      box-sizing: inherit;
-    }
-
-    html,
-    body {
-      background-color: #000;
-      width: 100%;
-      height: 100%;
-    }
-
-    ul#countdown {
-      position: relative;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 50%;
-      margin: 0 auto;
-      padding: 15px 0 20px 0;
-      color: #fff;
-      border: 1px solid #adafb2;
-      border-width: 1px 0;
-      overflow: hidden;
-      font-family: 'Arial Narrow', Arial, sans-serif;
-      font-weight: bold;
-
-      li {
-        margin: 0 5px 0 0;
-        padding: 0;
-        display: inline-block;
-        width: 15%;
-        font-size: 72px;
-        font-size: 6vw;
-        text-align: center;
-
-        .label {
-          color: #adafb2;
-          font-size: 18px;
-          font-size: 1.5vw;
-          text-transform: uppercase;
-        }
-      }
-    }
-
-    h1 {
-      text-align: center;
-      color: #adafb2;
-      font-size: 18px;
-      font-size: 1.5vw;
-      text-transform: uppercase;
-    }
-
 </style>
 
 <html>
     <head>
         <meta charset="UTF-8">
         <title>Teste</title>
-        <!-- <link rel="stylesheet" href="/css/estilo.css">
-        <script src="/js/vue.min.js"></script> -->
+
         <script src="https://code.jquery.com/jquery-1.9.1.js"></script>
         <script type="text/javascript" src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+
+        <link rel="stylesheet" href="contador.css">
+        <script src="contador.js"></script>
+
     </head>
     <body class="exercicio">
         <h1> 21/07/2023 </h1>
@@ -102,89 +50,5 @@
 </html>
 
 <script>
-
-    var targetDate = new Date("2023/07/21 20:00:00");
-
-    var year;
-    var month;
-
-    var days;
-    var hrs;
-    var min;
-    var sec;
-
-    $(function() {
-
-        timeToLaunch();
-
-        numberTransition('#year .number', year, 1000, 'easeOutQuad');
-        numberTransition('#month .number', month, 1000, 'easeOutQuad');
-
-        numberTransition('#days .number', days, 1000, 'easeOutQuad');
-        numberTransition('#hours .number', hrs, 1000, 'easeOutQuad');
-        numberTransition('#minutes .number', min, 1000, 'easeOutQuad');
-        numberTransition('#seconds .number', sec, 1000, 'easeOutQuad');
-
-        setTimeout(countDownTimer,1001);
-    });
-
-
-    function timeToLaunch(){
-
-        var currentDate = new Date();
-
-        // Datas
-        var diff = (currentDate - targetDate)/1000;
-        var diff = Math.abs(Math.floor(diff));
-
-        // Ano
-        year = Math.floor(diff/(365*24*60*60));
-        diff = diff - year * 365*24*60*60;
-
-        // Meses
-        month = Math.floor(diff/(30*24*60*60));
-        diff = diff - month * 30*24*60*60;
-
-        // Dias
-        days = Math.floor(diff/(24*60*60));
-        sec = diff - days * 24*60*60;
-
-        // Horas
-        hrs = Math.floor(sec/(60*60));
-        sec = sec - hrs * 60*60;
-
-        // Minutos
-        min = Math.floor(sec/(60));
-        sec = sec - min * 60;
-    }
-
-    function countDownTimer(){
-
-        timeToLaunch();
-
-        $( "#year .number" ).text(year);
-        $( "#month .number" ).text(month);
-
-        $( "#days .number" ).text(days);
-        $( "#hours .number" ).text(hrs);
-        $( "#minutes .number" ).text(min);
-        $( "#seconds .number" ).text(sec);
-
-        setTimeout(countDownTimer,1000);
-    }
-
-    function numberTransition(id, endPoint, transitionDuration, transitionEase){
-
-        $({numberCount: $(id).text()}).animate({numberCount: endPoint}, {
-            duration: transitionDuration,
-            easing:transitionEase,
-            step: function() {
-                $(id).text(Math.floor(this.numberCount));
-            },
-            complete: function() {
-                $(id).text(this.numberCount);
-            }
-        });
-    };
 
 </script>
