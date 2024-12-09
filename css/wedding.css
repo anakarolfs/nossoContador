@@ -6,7 +6,7 @@
     display: inline-grid;
     grid-auto-flow: column;
     grid-auto-columns: 1fr;
-    gap: 1rem;
+    gap: 5rem;
   }
   .countdown > .part {
     display: grid;
@@ -18,7 +18,7 @@
     place-items: center;
     border-radius: 50%;
     border: 1px solid hsl(0 0% 50% / .5);
-    font-size: 1.5rem;
+    font-size: 2.0rem;
     position: relative
   }
   .countdown > .part.days { --num: 365 }
