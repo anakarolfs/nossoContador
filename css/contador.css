@@ -14,7 +14,7 @@
     /*display: grid; /* -- CORES --*/
   }
 
-  ul#countdown {
+  ul#countdown01 {
     position: relative;
     top: 50%;
     transform: translateY(50%);
@@ -46,10 +46,3 @@
     }
   }
 
-  h1 {
-    text-align: center;
-    color: #adafb2;
-    font-size: 18px;
-    font-size: 1.5vw;
-    text-transform: uppercase;
-  }

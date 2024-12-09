@@ -1,6 +1,7 @@
-.nossoDia {
+.nossoDia  {
     text-align: center;
-    font-size: 50px;
-    color: #fff;
-    font-family: 'Saira Extra Condensed', sans-serif;
-}
+    color: #adafb2;
+    font-size: 18px;
+    font-size: 1.5vw;
+    text-transform: uppercase;
+  }

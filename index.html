@@ -16,11 +16,11 @@
         <script type="text/javascript" src="https://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.10/jquery-ui.min.js"></script>
 
         <link rel="stylesheet" href="css/contador.css">
-        <link rel="stylesheet" href="css/nossoDia.css">
+        <!-- <link rel="stylesheet" href="css/nossoDia.css"> -->
         <link rel="stylesheet" href="css/wedding.css">
 
         <script src="js/contador.js"></script>
-        <script src="js/coresMouse.js"></script>
+        <!-- <script src="js/coresMouse.js"></script> -->
         <script src="js/wedding.js"></script>
 
     </head>
@@ -31,7 +31,7 @@
         <h1 class="nossoDia"> 21/07/2023 </h1>
 
         <div class="container">
-            <ul id="countdown">
+            <ul id="countdown01">
             <!-- teste -->
                 <li id="year">
                     <div class="number">00</div>
@@ -61,19 +61,71 @@
             </ul>
         </div>
 
+        <br>
+        <!-- contagem regressiva -->
+
+        <h2>Christmas '24</h2>
+        <time class="countdown" date-time="2024-12-25 00:00:00" style="--accent: red"></time>
+        <h2>New Year '24</h2>
+        <time class="countdown" date-time="2025-01-01 00:00:00" style="--accent: green"></time>
+
+        <!-- contagem regressiva -->
+
     </body>
 
-            <!-- contagem regressiva -->
-
-            <h2>Christmas '24</h2>
-            <time class="countdown" date-time="2024-12-25 00:00:00" style="--accent: red"></time>
-            <h2>New Year '24</h2>
-            <time class="countdown" date-time="2025-01-01 00:00:00" style="--accent: green"></time>
-
-            <!-- contagem regressiva -->
 
 </html>
 
 <script>
+
+class Countdown {
+  constructor(el){
+    this.el = el;
+    this.targetDate = new Date(el.getAttribute("date-time"));
+    this.createCountDownParts()
+    this.countdownFunction();
+    this.countdownLoopId = setInterval(this.countdownFunction.bind(this), 1000)
+  }
+  createCountDownParts(){
+    ["days", "hours", "minutes", "seconds"].forEach(part => {
+      const partEl = document.createElement("div");
+      partEl.classList.add("part", part);
+      const textEl = document.createElement("div");
+      textEl.classList.add("text");
+      textEl.innerText = part;
+      const numberEl = document.createElement("div");
+      numberEl.classList.add("number");
+      numberEl.innerText = 0;
+      partEl.append(numberEl, textEl);
+      this.el.append(partEl);
+      this[part] = numberEl;
+    })
+  }
+
+  countdownFunction(){
+    const currentDate = new Date();
+    if(currentDate > this.targetDate) return clearInterval(this.intervalId);
+    const remaining = this.getRemaining(this.targetDate, currentDate);
+    Object.entries(remaining).forEach(([part,value]) => {
+      this[part].style.setProperty("--value", value)
+      this[part].innerText = value
+    })
+  }
+
+  getRemaining(target, now){
+    let seconds = Math.floor((target - (now))/1000);
+    let minutes = Math.floor(seconds/60);
+    let hours = Math.floor(minutes/60);
+    let days = Math.floor(hours/24);
+    hours = hours-(days*24);
+    minutes = minutes-(days*24*60)-(hours*60);
+    seconds = seconds-(days*24*60*60)-(hours*60*60)-(minutes*60);
+    return { days, hours, minutes, seconds }
+  }
+
+}
+
+const countdownEls= document.querySelectorAll(".countdown") || [];
+countdownEls.forEach(countdownEl => new Countdown(countdownEl))
 
 </script>
